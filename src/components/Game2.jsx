@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Game2 = () => {
-  const choices = ["dash", "kagiz", "qayci"];
+  const choices = ["rock", "paper", "scissors"];
 
   const [player, setPlayer] = useState(null);
   const [computer, setComputer] = useState(null);
@@ -21,9 +21,9 @@ const Game2 = () => {
     setComputer(computerChoice);
 
     const win =
-      (playerChoice === "kagiz" && computerChoice === "dash") ||
-      (playerChoice === "qayci" && computerChoice === "kagiz") ||
-      (playerChoice === "dash" && computerChoice === "qayci");
+      (playerChoice === "paper" && computerChoice === "rock") ||
+      (playerChoice === "scissors" && computerChoice === "paper") ||
+      (playerChoice === "rock" && computerChoice === "scissors");
 
     if (playerChoice === computerChoice) {
       setResult("Draw 🤝");
@@ -43,22 +43,20 @@ const Game2 = () => {
 
   return (
     <div className="container">
-
       {/* Nəticə varsa */}
       {result ? (
         <div className="cart">
-
           <div className="result">
-            <p>Sen: {player}</p>
-            <p>Komputer: {computer}</p>
+            <p>You: {player}</p>
+            <p>Computer: {computer}</p>
 
             <h1
               className={
-                result === "uddun"
+                result === "Winner 🏆"
                   ? "win"
-                  : result === "uduzdun"
-                  ? "lose"
-                  : ""
+                  : result === "You lost 😞"
+                    ? "lose"
+                    : ""
               }
             >
               {result}
@@ -66,30 +64,23 @@ const Game2 = () => {
           </div>
 
           <div className="buttons">
-            <button onClick={resetGame}>Yeniden bashla</button>
+            <button onClick={resetGame}>Try again</button>
           </div>
-
         </div>
       ) : (
         // Oyun paneli
         <div className="card">
-
-          <h2>Daş - Kağız - Qayçı</h2>
+          <h2>Rock - Paper - Scissors</h2>
 
           <div className="buttons">
             {choices.map((item, index) => (
-              <button
-                key={index}
-                onClick={() => playGame(item)}
-              >
+              <button key={index} onClick={() => playGame(item)}>
                 {item}
               </button>
             ))}
           </div>
-
         </div>
       )}
-
     </div>
   );
 };
